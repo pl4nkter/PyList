@@ -23,28 +23,6 @@ def parse_time(time_str: str) -> timedelta:
     return timedelta(**kwargs)
 
 
-def convert_time(time_str: str) -> str:
-    time_units = {
-        'd': 'day',
-        'h': 'hour',
-        'm': 'minute',
-        's': 'second'
-    }
-
-    time_components = re.findall(r'(\d+)([dhms])', time_str)
-
-    readable_parts = []
-    for amount, unit in time_components:
-        unit_name = time_units[unit]
-        if int(amount) > 1:
-            unit_name += 's'  # Pluralize the unit if the amount is more than 1
-        readable_parts.append(f"{amount} {unit_name}")
-
-    # Join the parts into a readable string
-    readable_time = " ".join(readable_parts)
-    return readable_time
-
-
 def convert_timedelta(delta: timedelta) -> str:
     total_seconds = int(delta.total_seconds())
     days, remainder = divmod(total_seconds, 86400)
